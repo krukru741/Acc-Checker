@@ -393,9 +393,13 @@ def check_account(username, password):
                     'avatar': account_info.get('user_info', {}).get('avatar', '')
                 }
 
-                # Get games from game_otp_configs
-                games = []
+                # Get login history
+                login_history = account_info.get('login_history', [])
+                latest_login = login_history[0] if login_history else None
+                
+                # Get game configurations
                 game_configs = account_info.get('game_otp_configs', {})
+                games = []
                 for region, region_games in game_configs.items():
                     for game_id, game_info in region_games.items():
                         game_name = game_info.get('name', '')
@@ -416,6 +420,17 @@ def check_account(username, password):
                     f"    Nickname: {user_info['nickname'] if user_info['nickname'] else 'Not Set'}\n"
                     f"    Shell: {user_info['shell']}\n"
                     f"    Signature: {user_info['signature'] if user_info['signature'] else 'Not Set'}\n"
+                    f"    Avatar: {user_info['avatar'] if user_info['avatar'] else 'Not Set'}\n"
+                    f"    Games: {', '.join(games) if games else 'None'}\n"
+                    f"    Security:\n"
+                    f"        Email Verified: {'Yes' if user_info.get('email_v') == 1 else 'No'}\n"
+                    f"        Two-Step Verify: {'Enabled' if user_info.get('two_step_verify_enable') == 1 else 'Disabled'}\n"
+                    f"        Authenticator: {'Enabled' if user_info.get('authenticator_enable') == 1 else 'Disabled'}\n"
+                    f"        Suspicious: {'Yes' if user_info.get('suspicious') else 'No'}\n"
+                    f"    Last Login:\n"
+                    f"        IP: {latest_login.get('ip') if latest_login else 'N/A'}\n"
+                    f"        Country: {latest_login.get('country') if latest_login else 'N/A'}\n"
+                    f"        Source: {latest_login.get('source') if latest_login else 'N/A'}\n"
                     f"\n--------------------------------------------------------------------------------\n"
                 )
                 
