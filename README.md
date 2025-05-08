@@ -15,42 +15,40 @@ A Python-based tool for checking the validity and status of Garena accounts.
 
 ## Features
 
-- Bulk account checking capability
-- Colorized console output for better readability
-- Progress bar for bulk operations
-- Detailed error reporting
-- Session management with automatic retry
-- Saves results to output file
-- Handles captcha detection
-- Detailed logging to file
-- Clean console output
+- ✅ Bulk account checking from a text file
+- ✅ Detailed account information display
+- ✅ Session key retrieval
+- ✅ Account status verification
+- ✅ Clean and readable output format
+- ✅ Progress bar for bulk operations
+- ✅ Comprehensive error handling
+- ✅ Detailed logging system
 
-## Prerequisites
+## Requirements
 
-- Python 3.x
-- pip (Python package installer)
+- Python 3.7 or higher
 - Required Python packages:
   - requests
   - tqdm
   - colorama
-  - logging
+  - pycryptodome
 
 ## Installation
 
-1. Clone this repository or download the files:
+1. Clone the repository:
 ```bash
 git clone https://github.com/krukru741/Acc-Checker.git
 cd Acc-Checker
 ```
 
-2. Install the required dependencies:
+2. Install required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Usage
 
-1. Create an input file (e.g., `accounts.txt`) with accounts in the following format:
+1. Prepare your accounts file (e.g., `accounts.txt`) with accounts in the format:
 ```
 username1:password1
 username2:password2
@@ -63,86 +61,76 @@ python account_checker.py
 ```
 
 3. When prompted:
-   - Enter the name of your input file containing the accounts
-   - Enter the name for the output file where results will be saved
-
-4. The script will process each account and display results in real-time with color coding:
-   - 🟢 Green: Successful login and account verification
-   - 🔴 Red: Failed login attempts or errors
-   - 🟡 Yellow: Retry attempts
+   - Enter the path to your accounts file
+   - Enter the path where you want to save the results
 
 ## Output Format
 
-The results will be saved in your specified output file with the following format:
+### Successful Check
 ```
-[SUCCESS] Account: username:password, User Info: {account_details}
-[FAILED] Account: username:password, Status: {error_message}
+✅ Account Check Success
+    Login: username:password
+    UID: 12345678
+    Username: username
+    Session: session_key
+    Country: PH
+    Email: exa****@gmail.com
+    Mobile: Not Set
+    Facebook: Not Connected
+    Nickname: Not Set
+    Shell: 0
+    Signature: signature
+
+--------------------------------------------------------------------------------
+```
+
+### Failed Check
+```
+❌ Account Check Failed
+    Login: username:password
+    Error Details:
+    Type: Authentication Error
+    Message: error_msg
+
+--------------------------------------------------------------------------------
 ```
 
 ## Features in Detail
 
-- **Session Management**: Automatically handles session expiration and retries
-- **Error Handling**: Comprehensive error catching and reporting
-- **Rate Limiting**: Built-in delays to prevent IP blocking
-- **Progress Tracking**: Visual progress bar for bulk operations
-- **Captcha Detection**: Alerts when captcha verification is required
-- **Logging**: Detailed logging to file for debugging and analysis
+- **Account Information**: Retrieves detailed account information including:
+  - UID
+  - Username
+  - Session key
+  - Country
+  - Email (partially masked)
+  - Mobile number (if set)
+  - Facebook connection status
+  - Nickname
+  - Shell
+  - Signature
 
-## File Structure
+- **Error Handling**: Comprehensive error handling for:
+  - Authentication failures
+  - Network issues
+  - Invalid credentials
+  - Session errors
 
-```
-Acc-Checker/
-├── account_checker.py    # Main script
-├── requirements.txt      # Python dependencies
-├── logs/                 # Log files directory
-└── README.md            # This file
-```
+- **Logging**: Detailed logging system that:
+  - Creates timestamped log files
+  - Records all operations
+  - Helps in debugging issues
 
-## Logging
+## Notes
 
-Logs are stored in the `logs` directory with filenames in the format:
-```
-account_checker_YYYYMMDD_HHMMSS.log
-```
-
-Each log file contains:
-- Timestamps for all operations
-- Detailed error information
-- HTTP responses
-- Session management details
-- Account check results
-
-## Important Notes
-
-- This tool is for educational purposes only
-- Ensure you have permission to check the accounts
-- Be aware of Garena's terms of service and usage policies
-- Use reasonable delays between checks to avoid IP blocks
-- All detailed information is logged to file for debugging
-- Console output is kept minimal for better readability
+- The tool includes a delay between checks to prevent rate limiting
+- All sensitive information is partially masked in the output
+- Logs are stored in the `logs` directory
+- Invalid account formats are automatically skipped
 
 ## Disclaimer
 
-This tool is provided for educational purposes only. Users are responsible for:
-- Ensuring they have permission to check any accounts
-- Complying with Garena's terms of service
-- Following applicable laws and regulations
-- Using the tool responsibly and ethically
-
-The author is not responsible for any misuse of this tool or any consequences resulting from such misuse.
-
-## Original Repository
-
-This project is based on [krukru741/Acc-Checker](https://github.com/krukru741/Acc-Checker)
-
-## Author
-
-Original Author: @Shin
+This tool is for educational purposes only. Use it responsibly and in accordance with Garena's terms of service.
 
 ## License
 
-This project is for educational purposes only. Use at your own risk.
-
-## Contributing
-
-Feel free to submit issues and enhancement requests!
+This project is licensed under the MIT License - see the LICENSE file for details.
